@@ -1,13 +1,18 @@
 package com.networking.mc.model;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class UserModel {
+    @NonNull
+    public String userName;
 
-    private String userName;
-    private String Latitude;
-    private String longitude;
+    @NonNull
+    public String Latitude;
+
+    @NonNull
+    public String longitude;
 }
