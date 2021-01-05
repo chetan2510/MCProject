@@ -20,9 +20,9 @@ public class User {
         return "User added successfully";
     }
 
-    @RequestMapping(value = "/getuser", method = RequestMethod.GET)
-    public UserModel getUser(@RequestBody UserModel userModel) {
-        return userService.getUser(userModel);
+    @RequestMapping(value = "/getuser", method = RequestMethod.POST)
+    public UserModel getUser(@PathVariable @NonNull String  username) {
+        return userService.getUser(username);
     }
 
     @RequestMapping(value = "/deleteuser", method = RequestMethod.DELETE)

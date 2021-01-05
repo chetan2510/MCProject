@@ -1,6 +1,7 @@
 package com.networking.mc.service;
 
 import com.networking.mc.Exceptions.Service.UserAlreadyExistsException;
+import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
 import com.networking.mc.model.UserModel;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +29,15 @@ public class UserService {
         userModeMap.remove(userModel.userName);
     }
 
-    public UserModel getUser(UserModel userModel) {
-        return userModeMap.get(userModel.userName);
+    public UserModel getUser(String userName) {
+        return userModeMap.get(userName);
     }
 
     public void updateUserLocation(UserModel userModel) {
-        userModeMap.get(userModel.userName).Latitude = userModel.Latitude;
-        userModeMap.get(userModel.userName).Latitude = userModel.longitude;
+        if(userModeMap.get(userModel.userName) != null) {
+            userModeMap.put(userModel.userName, userModel);
+        } else {
+            throw new UserDoesNotExistsException();
+        }
     }
 }
