@@ -11,9 +11,9 @@
 </head>
 
 <body>
-<h1>${message}</h1>
-<h2>Hello</h2>
-<h2>${userList.size()}</h2>
+<%--<h1>${message}</h1>--%>
+<%--<h2>Hello</h2>--%>
+<%--<h2>${userList.size()}</h2>--%>
 <h1 align="center">User List</h1>
 <br/>
 <table border="1" cellpadding="10">
