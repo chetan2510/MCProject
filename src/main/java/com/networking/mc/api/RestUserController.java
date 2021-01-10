@@ -30,10 +30,10 @@ public class RestUserController {
         userService.deleteUser(username);
         return "User deleted successfully";
     }
-    @RequestMapping(value = "/getallusers", method = RequestMethod.GET)
-    public Collection<UserModel> getAllUsers() {
-       return userService.getUserList();
-    }
+//    @RequestMapping(value = "/getallusers", method = RequestMethod.GET)
+//    public Collection<UserModel> getAllUsers() {
+//       return userService.getUserList();
+//    }
 
     @RequestMapping(value = "/updateuserlocation", method = RequestMethod.POST)
     public String updateLocation(@RequestBody UserModel userModel) {

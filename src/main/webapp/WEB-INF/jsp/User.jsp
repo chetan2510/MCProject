@@ -19,6 +19,7 @@
         Longitude: <input type="text" name="longitude"><br>
         <input type="submit" value="Submit">
     </form>
+
 </div>
 
 </body>

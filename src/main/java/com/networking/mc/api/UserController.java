@@ -10,6 +10,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Controller
 public class UserController {
@@ -33,7 +34,13 @@ public class UserController {
         userModel.userName = paramMap.get("userName").get(0);
         userService.addUserToList(userModel);
         model.addAttribute("message", "User added successfully");
+       return "UserAddSuccess";
+    }
+
+
+    @RequestMapping(value = "/getallusers", method = RequestMethod.GET)
+    public String getAllUsers(Model model) {
         model.addAttribute("userList", new ArrayList<>(userService.getUserList()));
-        return "added";
+        return "DisplayUsers";
     }
 }
