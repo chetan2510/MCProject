@@ -11,7 +11,7 @@ public class UserModel {
     public String userName;
 
     @NonNull
-    public String Latitude;
+    public String latitude;
 
     @NonNull
     public String longitude;

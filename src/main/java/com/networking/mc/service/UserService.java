@@ -25,12 +25,22 @@ public class UserService {
         return userModeMap.values();
     }
 
-    public void deleteUser(UserModel userModel) {
-        userModeMap.remove(userModel.userName);
+    public void deleteUser(String userName) {
+        if(userModeMap.get(userName) != null) {
+            userModeMap.remove(userName);
+        }
+        else {
+            throw new UserDoesNotExistsException();
+        }
     }
 
     public UserModel getUser(String userName) {
-        return userModeMap.get(userName);
+
+        if (userModeMap.get(userName) != null) {
+            return userModeMap.get(userName);
+        } else {
+            throw new UserDoesNotExistsException() ;
+        }
     }
 
     public void updateUserLocation(UserModel userModel) {
