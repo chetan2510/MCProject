@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Sun Jan 10 09:41:44 IST 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0176-ea7e-248b-0000010520b8 
-on database directory memory:/Users/brian/Desktop/MobileComputing/MCProject/c4fc2754-3ab8-410d-b1ca-df8e1dd65d48 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@3d4eac69 
-Loaded from file:/Users/brian/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Mon Jan 11 09:48:48 IST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0176-efaa-f886-000000e79f40 
+on database directory memory:/Users/brian/Desktop/MobileComputing/MCProject/b30f2e6d-e039-4153-9171-6e5ef57ccc2b with class loader org.springframework.boot.loader.LaunchedURLClassLoader@26a1ab54 
+Loaded from jar:file:/Users/brian/Desktop/MobileComputing/MCProject/target/mc-1.0.0-SNAPSHOT.jar!/BOOT-INF/lib/derby-10.14.2.0.jar!/
 java.vendor=Oracle Corporation
 java.runtime.version=12.0.2+10
 user.dir=/Users/brian/Desktop/MobileComputing/MCProject

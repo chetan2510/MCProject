@@ -9,6 +9,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
+<script>
+    function onclick_event() {
+        document.location.href = "/getallusers";
+    }
+</script>
+
 <body>
 
 <div align="center">
@@ -22,6 +28,10 @@
 
 </div>
 
+
+<div align="center">
+    <button type="button" class="btn btn-danger" onclick = "onclick_event()">View User List</button>
+</div>
 </body>
 
 

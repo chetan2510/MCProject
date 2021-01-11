@@ -17,25 +17,11 @@
 </script>
 
 <body>
-<%--<h1>${message}</h1>--%>
-<%--<h2>Hello</h2>--%>
-<%--<h2>${userList.size()}</h2>--%>
-<h1 align="center">User List</h1>
-<br/>
-<table border="1" cellpadding="10">
-    <tr>
-        <th>Name</th><th>Latitude</th><th>Longitude</th>
-    </tr>
-    <c:forEach var="contact" items="${userList}">
-        <tr>
-            <td>${contact.userName}</td>
-            <td>${contact.latitude}</td>
-            <td>${contact.longitude}</td>
-        </tr>
-    </c:forEach>
-</table>
+
+<h1>${message}</h1>
 
 <div align="center">
-    <button type="button" class="btn btn-primary" onclick = "onclick_event()">Add More Users</button>
+    <button type="button" class="btn btn-danger" onclick = "onclick_event()">Add user to the list</button>
 </div>
+
 </body>

@@ -3,6 +3,7 @@ package com.networking.mc.api;
 import com.networking.mc.model.UserModel;
 import com.networking.mc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +14,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Controller
+@EnableAutoConfiguration
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping({"/", "/hello"})
+    @RequestMapping(value="/getuserform", method = RequestMethod.GET)
     public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
         model.addAttribute("name", name);
         return "User";
@@ -40,7 +42,15 @@ public class UserController {
 
     @RequestMapping(value = "/getallusers", method = RequestMethod.GET)
     public String getAllUsers(Model model) {
-        model.addAttribute("userList", new ArrayList<>(userService.getUserList()));
-        return "DisplayUsers";
+
+        Collection<UserModel> userList = userService.getUserList();
+        if(userList.isEmpty()) {
+            model.addAttribute("message", "User list is emply, please add users first");
+            return "DisplayEmptyUsers";
+        } else {
+            model.addAttribute("userList", new ArrayList<>(userService.getUserList()));
+            return "DisplayUsers";
+        }
+
     }
 }
