@@ -6,9 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserModel {
+public class RescueModel {
+
     @NonNull
-    public String userName;
+    public String rescuerName;
 
     @NonNull
     public String latitude;
@@ -16,14 +17,16 @@ public class UserModel {
     @NonNull
     public String longitude;
 
+    public boolean isNotificationSent;
+
     /**
      * Constructor
-     * @param userName
+     * @param rescuerName
      * @param latitude
      * @param longitude
      */
-    public UserModel(String userName, String latitude, String longitude) {
-        this.userName = userName;
+    public RescueModel(String rescuerName, String latitude, String longitude) {
+        this.rescuerName = rescuerName;
         this.latitude = latitude;
         this.longitude = longitude;
     }

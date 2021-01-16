@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 public class UserService {
 
     private LinkedHashMap<String , UserModel> userModeMap = new LinkedHashMap<>();
-    public String notification = "Displaying users list";
+    public String notification = "";
 
     public void addUserToList(UserModel userModel) {
         if(userModeMap.get(userModel.userName) == null) {
@@ -66,8 +66,9 @@ public class UserService {
      * @param notification
      */
     public void addNotification(String notification) {
-
-        if(StringUtil.isNullOrEmpty(notification)) {
+        if(StringUtil.isNullOrEmpty(notification) || "empty".equals(notification)) {
+            this.notification = "";
+        } else {
             this.notification = notification;
         }
     }
