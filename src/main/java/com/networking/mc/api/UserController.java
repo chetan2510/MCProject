@@ -30,10 +30,7 @@ public class UserController {
             path = "/adduser",
             consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public String addUser(@RequestParam MultiValueMap<String,String> paramMap, Model model) {
-        UserModel userModel = new UserModel();
-        userModel.latitude = paramMap.get("latitude").get(0);
-        userModel.longitude = paramMap.get("longitude").get(0);
-        userModel.userName = paramMap.get("userName").get(0);
+        UserModel userModel = new UserModel(paramMap.get("userName").get(0), paramMap.get("latitude").get(0), paramMap.get("longitude").get(0));
         userService.addUserToList(userModel);
         model.addAttribute("message", "User added successfully");
        return "UserAddSuccess";
@@ -49,8 +46,18 @@ public class UserController {
             return "DisplayEmptyUsers";
         } else {
             model.addAttribute("userList", new ArrayList<>(userService.getUserList()));
+            if(!userService.notification.equals("empty")) {
+                model.addAttribute("notification", userService.notification);
+            }
             return "DisplayUsers";
         }
 
+    }
+
+    @RequestMapping(value="/addmultipleusers", method = RequestMethod.GET)
+    public String addMultipleUsers(Model model) {
+            userService.addMultipleUsers();
+            model.addAttribute("message", "Multiple users added to the list");
+            return "MultipleUsers";
     }
 }

@@ -3,6 +3,7 @@ package com.networking.mc.service;
 import com.networking.mc.Exceptions.Service.UserAlreadyExistsException;
 import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
 import com.networking.mc.model.UserModel;
+import io.netty.util.internal.StringUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -12,6 +13,7 @@ import java.util.LinkedHashMap;
 public class UserService {
 
     private LinkedHashMap<String , UserModel> userModeMap = new LinkedHashMap<>();
+    public String notification = "Displaying users list";
 
     public void addUserToList(UserModel userModel) {
         if(userModeMap.get(userModel.userName) == null) {
@@ -48,6 +50,25 @@ public class UserService {
             userModeMap.put(userModel.userName, userModel);
         } else {
             throw new UserDoesNotExistsException();
+        }
+    }
+
+    public void addMultipleUsers() {
+
+        for(int num = 1; num <=19; num++) {
+            UserModel userModel = new UserModel("User" +num, "1"+num, "1"+num);
+            addUserToList(userModel);
+        }
+    }
+
+    /**
+     *
+     * @param notification
+     */
+    public void addNotification(String notification) {
+
+        if(StringUtil.isNullOrEmpty(notification)) {
+            this.notification = notification;
         }
     }
 }

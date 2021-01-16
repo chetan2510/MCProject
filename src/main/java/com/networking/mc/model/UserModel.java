@@ -15,4 +15,17 @@ public class UserModel {
 
     @NonNull
     public String longitude;
+
+    public boolean isNotificationSent;
+    /**
+     * Constructor
+     * @param userName
+     * @param latitude
+     * @param longitude
+     */
+    public UserModel(String userName, String latitude, String longitude) {
+        this.userName = userName;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
