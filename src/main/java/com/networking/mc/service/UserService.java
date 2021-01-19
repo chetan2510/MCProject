@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 
 @Service  // will register it as a service. singleton only one instance will be there.
 public class UserService {
@@ -34,6 +35,10 @@ public class UserService {
         else {
             throw new UserDoesNotExistsException();
         }
+    }
+
+    public void deleteAll() {
+       this.userModeMap.clear();
     }
 
     public UserModel getUser(String userName) {

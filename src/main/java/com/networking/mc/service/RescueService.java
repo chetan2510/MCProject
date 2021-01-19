@@ -7,6 +7,7 @@ import com.networking.mc.model.RescueModel;
 import io.netty.util.internal.StringUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 @Service
@@ -24,8 +25,8 @@ public class RescueService {
         }
     }
 
-    public LinkedHashMap<String , RescueModel> getRescuerList() {
-        return rescuerModeMap;
+    public Collection<RescueModel> getRescuerList() {
+        return rescuerModeMap.values();
     }
 
     public void addMultipleUsers(){
@@ -33,6 +34,10 @@ public class RescueService {
             RescueModel rescueModel = new RescueModel("Rescuer" +num, "1"+num, "1"+num);
             addRescuerToList(rescueModel);
         }
+    }
+
+    public void clearAllRescuers(){
+       this.rescuerModeMap.clear();
     }
 
     /**
