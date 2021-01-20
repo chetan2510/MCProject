@@ -1,14 +1,12 @@
 package com.networking.mc.api;
 
 import com.networking.mc.api.response.GeneralResponseMessage;
+import com.networking.mc.api.response.NotificationMessage;
 import com.networking.mc.model.RescueModel;
-import com.networking.mc.model.UserModel;
 import com.networking.mc.service.RescueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
-import java.util.LinkedHashMap;
 
 @RestController
 @RequestMapping("/rescuer")
@@ -17,10 +15,11 @@ public class RescueTeamAPI {
     @Autowired
     private RescueService rescueService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/addrescuer", method = RequestMethod.POST)
-    public String addUser(@RequestBody RescueModel rescueModel) {
+    public GeneralResponseMessage addUser(@RequestBody RescueModel rescueModel) {
         rescueService.addRescuerToList(rescueModel);
-        return "Rescuer added successfully";
+        return new GeneralResponseMessage("Rescuer added successfully");
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -43,8 +42,22 @@ public class RescueTeamAPI {
         return new GeneralResponseMessage("Multiple rescuers cleared from the list");
     }
 
-    @RequestMapping(value = "/getRescuerNotification", method = RequestMethod.GET)
-    public String getNotification() {
-        return rescueService.notification.equals("") ? "":rescueService.notification;
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value="/deleterescuer", method = RequestMethod.DELETE)
+    public GeneralResponseMessage deleteRescuer(@RequestParam String rescuerName) {
+        rescueService.deleteRescuer(rescuerName);
+        return new GeneralResponseMessage("Rescuer Deleted");
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/getrescuernotification", method = RequestMethod.GET)
+    public NotificationMessage getNotification() {
+        NotificationMessage notificationMessage = new NotificationMessage("");
+        if(rescueService.notification.equals("")) {
+            return  notificationMessage;
+        } else {
+            notificationMessage.notificationMessage=rescueService.notification;
+            return  notificationMessage;
+        }
     }
 }

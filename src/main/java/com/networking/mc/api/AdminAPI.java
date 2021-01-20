@@ -51,11 +51,7 @@ public class AdminAPI {
         return "User Deleted";
     }
 
-    @RequestMapping(value="/deleterescuer", method = RequestMethod.POST)
-    public String deleteRescuer(@RequestParam String rescuerName) {
-        rescueService.deleteRescuer(rescuerName);
-        return "Rescuer Deleted";
-    }
+
 
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public String addUser(@RequestBody UserModel userModel) {

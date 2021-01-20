@@ -16,11 +16,13 @@ public class UserService {
     private LinkedHashMap<String , UserModel> userModeMap = new LinkedHashMap<>();
     public String notification = "";
 
-    public void addUserToList(UserModel userModel) {
+    public String addUserToList(UserModel userModel) {
         if(userModeMap.get(userModel.userName) == null) {
             userModeMap.put(userModel.userName, userModel);
+            return "User added successfully";
         } else {
-            throw new UserAlreadyExistsException();
+            userModeMap.put(userModel.userName, userModel);
+            return "User location updated successfully";
         }
     }
 
@@ -47,14 +49,6 @@ public class UserService {
             return userModeMap.get(userName);
         } else {
             throw new UserDoesNotExistsException() ;
-        }
-    }
-
-    public void updateUserLocation(UserModel userModel) {
-        if(userModeMap.get(userModel.userName) != null) {
-            userModeMap.put(userModel.userName, userModel);
-        } else {
-            throw new UserDoesNotExistsException();
         }
     }
 
