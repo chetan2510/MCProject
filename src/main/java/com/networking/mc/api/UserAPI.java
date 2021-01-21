@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 
 
 @RestController // Marks this class that it has controllers inside it
@@ -64,15 +65,9 @@ public class UserAPI {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getusernotification", method = RequestMethod.GET)
-    public NotificationMessage getNotification() {
-        logger.info("Request received at " + Instant.now() + "at /gerusernotification api");
-        NotificationMessage notificationMessage = new NotificationMessage("");
-        if(userService.notification.equals("")) {
-            return  notificationMessage;
-        } else {
-            notificationMessage.notificationMessage=userService.notification;
-            return  notificationMessage;
-        }
+    public LinkedHashMap<String , String> getNotification() {
+        logger.info("Request received at " + Instant.now() + "at /getusernotification api");
+        return userService.notificationMap;
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

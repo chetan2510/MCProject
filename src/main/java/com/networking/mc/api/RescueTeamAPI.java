@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 
 @RestController
 @RequestMapping("/rescuer")
@@ -62,14 +63,8 @@ public class RescueTeamAPI {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getrescuernotification", method = RequestMethod.GET)
-    public NotificationMessage getNotification() {
-        NotificationMessage notificationMessage = new NotificationMessage("");
+    public LinkedHashMap<String , String> getNotification() {
         logger.info("Request received at " + Instant.now() + "at /getrescuernotification api");
-        if(rescueService.notification.equals("")) {
-            return  notificationMessage;
-        } else {
-            notificationMessage.notificationMessage=rescueService.notification;
-            return  notificationMessage;
-        }
+        return rescueService.notificationMap;
     }
 }

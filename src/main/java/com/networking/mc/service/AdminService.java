@@ -19,7 +19,7 @@ public class AdminService {
      * @param notification
      */
     public void sendNotificationToUsers(String notification) {
-        if(StringUtil.isNullOrEmpty(notification))
+        if(!StringUtil.isNullOrEmpty(notification))
         userService.addNotification(notification);
     }
 
@@ -28,7 +28,7 @@ public class AdminService {
      * @param notification
      */
     public void sendNotificationToRescuers(String notification) {
-        if(StringUtil.isNullOrEmpty(notification))
+        if(!StringUtil.isNullOrEmpty(notification))
             rescueService.addNotification(notification);
     }
 }

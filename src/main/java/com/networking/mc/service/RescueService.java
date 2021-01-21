@@ -15,7 +15,7 @@ public class RescueService {
 
     private LinkedHashMap<String , RescueModel> rescuerModeMap = new LinkedHashMap<>();
 
-    public String notification = "";
+    public LinkedHashMap<String , String> notificationMap  = new LinkedHashMap<>();
 
     public void addRescuerToList(RescueModel rescueModel) {
         if(rescuerModeMap.get(rescueModel.rescuerName) == null) {
@@ -45,11 +45,10 @@ public class RescueService {
      * @param notification
      */
     public void addNotification(String notification) {
-
         if(StringUtil.isNullOrEmpty(notification) || "empty".equals(notification)) {
-            this.notification = "";
+            this.notificationMap.put("notification", "");
         } else {
-            this.notification = notification;
+            this.notificationMap.put("notification", notification);
         }
     }
 

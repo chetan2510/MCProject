@@ -1,6 +1,5 @@
 package com.networking.mc.service;
 
-import com.networking.mc.Exceptions.Service.UserAlreadyExistsException;
 import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
 import com.networking.mc.model.UserModel;
 import io.netty.util.internal.StringUtil;
@@ -8,13 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 
 @Service  // will register it as a service. singleton only one instance will be there.
 public class UserService {
 
     private LinkedHashMap<String , UserModel> userModeMap = new LinkedHashMap<>();
-    public String notification = "";
+    public LinkedHashMap<String , String> notificationMap = new LinkedHashMap<>();
 
     public String addUserToList(UserModel userModel) {
         if(userModeMap.get(userModel.userName) == null) {
@@ -66,9 +64,9 @@ public class UserService {
      */
     public void addNotification(String notification) {
         if(StringUtil.isNullOrEmpty(notification) || "empty".equals(notification)) {
-            this.notification = "";
+            this.notificationMap.put("notification", "");
         } else {
-            this.notification = notification;
+            this.notificationMap.put("notification", notification);
         }
     }
 }
