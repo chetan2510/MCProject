@@ -2,56 +2,65 @@ package com.networking.mc.service;
 
 import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
 import com.networking.mc.model.UserModel;
+import com.networking.mc.repository.UserRepository;
 import io.netty.util.internal.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service  // will register it as a service. singleton only one instance will be there.
 public class UserService {
 
-    private LinkedHashMap<String , UserModel> userModeMap = new LinkedHashMap<>();
+
+    @Autowired
+    UserRepository userRepository;
+
+//    private LinkedHashMap<String , UserModel> userModeMap = new LinkedHashMap<>();
     public LinkedHashMap<String , String> notificationMap = new LinkedHashMap<>();
 
     public String addUserToList(UserModel userModel) {
-        if(userModeMap.get(userModel.userName) == null) {
-            userModeMap.put(userModel.userName, userModel);
+        if(userRepository.findByUserName(userModel.userName) == null) {
+            userRepository.save(userModel);
             return "User added successfully";
         } else {
-            userModeMap.put(userModel.userName, userModel);
+            userRepository.save(userModel);
             return "User location updated successfully";
         }
     }
 
-    public Collection<UserModel> getUserList() {
-        return userModeMap.values();
+    public Iterable<UserModel> getUserList() {
+        return userRepository.findAll();
     }
 
+    @Transactional
     public void deleteUser(String userName) {
-        if(userModeMap.get(userName) != null) {
-            userModeMap.remove(userName);
-        }
-        else {
+        if(userRepository.findByUserName(userName) != null) {
+//            userModeMap.remove(userName);
+            userRepository.deleteByUserName(userName);
+        } else {
             throw new UserDoesNotExistsException();
         }
     }
 
     public void deleteAll() {
-       this.userModeMap.clear();
+//       this.userModeMap.clear();
+       userRepository.deleteAll();
     }
 
     public UserModel getUser(String userName) {
 
-        if (userModeMap.get(userName) != null) {
-            return userModeMap.get(userName);
+        UserModel userModel = userRepository.findByUserName(userName);
+        if (userModel != null) {
+            return userModel;
         } else {
             throw new UserDoesNotExistsException() ;
         }
     }
 
     public void addMultipleUsers() {
-
         for(int num = 1; num <=19; num++) {
             UserModel userModel = new UserModel("User" +num, "1"+num, "1"+num);
             addUserToList(userModel);

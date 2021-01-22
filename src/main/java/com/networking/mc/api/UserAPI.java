@@ -2,7 +2,6 @@ package com.networking.mc.api;
 
 import com.networking.mc.api.response.GeneralResponseMessage;
 import com.networking.mc.api.response.MultipleuserAddedresponse;
-import com.networking.mc.api.response.NotificationMessage;
 import com.networking.mc.model.UserModel;
 import com.networking.mc.service.UserService;
 import lombok.NonNull;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 
 @RestController // Marks this class that it has controllers inside it
@@ -50,7 +50,7 @@ public class UserAPI {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getallusers", method = RequestMethod.GET)
-    public Collection<UserModel> getAllUsers() {
+    public Iterable<UserModel> getAllUsers() {
         logger.info("Request received at " + Instant.now() + "at /getallusers api");
        return userService.getUserList();
     }
