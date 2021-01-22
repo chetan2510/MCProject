@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 @Service  // will register it as a service. singleton only one instance will be there.
 public class UserService {

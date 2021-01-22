@@ -4,11 +4,16 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Getter
 @Setter
+@Entity
 public class RescueModel {
 
     @NonNull
+    @Id
     public String rescuerName;
 
     @NonNull
@@ -16,8 +21,6 @@ public class RescueModel {
 
     @NonNull
     public String longitude;
-
-    public boolean isNotificationSent;
 
     /**
      * Constructor
@@ -30,4 +33,6 @@ public class RescueModel {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    protected RescueModel() {}
 }

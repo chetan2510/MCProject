@@ -9,11 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.Instant;
-import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 
 @RestController // Marks this class that it has controllers inside it

@@ -25,14 +25,13 @@ public class RescueTeamAPI {
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/addrescuer", method = RequestMethod.POST)
     public GeneralResponseMessage addRescuer(@RequestBody RescueModel rescueModel) {
-        rescueService.addRescuerToList(rescueModel);
         logger.info("Request received at " + Instant.now() + "at /adrescuer api");
-        return new GeneralResponseMessage("Rescuer added successfully");
+        return new GeneralResponseMessage(rescueService.addRescuerToList(rescueModel));
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getallrescuers", method = RequestMethod.GET)
-    public Collection<RescueModel> getAllRescuers() {
+    public Iterable<RescueModel> getAllRescuers() {
         logger.info("Request received at " + Instant.now() + "at /getallrescuers api");
         return rescueService.getRescuerList();
     }

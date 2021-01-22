@@ -4,8 +4,11 @@ import com.networking.mc.Exceptions.Service.RescuerAlreadyExistsException;
 import com.networking.mc.Exceptions.Service.RescuerDoesNotExistsException;
 import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
 import com.networking.mc.model.RescueModel;
+import com.networking.mc.repository.RescuerRepository;
 import io.netty.util.internal.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -13,20 +16,25 @@ import java.util.LinkedHashMap;
 @Service
 public class RescueService {
 
-    private LinkedHashMap<String , RescueModel> rescuerModeMap = new LinkedHashMap<>();
+//    private LinkedHashMap<String , RescueModel> rescuerModeMap = new LinkedHashMap<>();
 
     public LinkedHashMap<String , String> notificationMap  = new LinkedHashMap<>();
 
-    public void addRescuerToList(RescueModel rescueModel) {
-        if(rescuerModeMap.get(rescueModel.rescuerName) == null) {
-            rescuerModeMap.put(rescueModel.rescuerName, rescueModel);
+    @Autowired
+    RescuerRepository rescuerRepository;
+
+    public String addRescuerToList(RescueModel rescueModel) {
+        if(rescuerRepository.findByRescuerName(rescueModel.rescuerName) == null) {
+            rescuerRepository.save(rescueModel);
+            return "Rescuer added to the list";
         } else {
-            throw new RescuerAlreadyExistsException();
+            rescuerRepository.save(rescueModel);
+            return "Rescuer location updated in the list";
         }
     }
 
-    public Collection<RescueModel> getRescuerList() {
-        return rescuerModeMap.values();
+    public Iterable<RescueModel> getRescuerList() {
+        return rescuerRepository.findAll();
     }
 
     public void addMultipleUsers(){
@@ -37,7 +45,7 @@ public class RescueService {
     }
 
     public void clearAllRescuers(){
-       this.rescuerModeMap.clear();
+       rescuerRepository.deleteAll();
     }
 
     /**
@@ -56,12 +64,13 @@ public class RescueService {
      *
      * @param rescuerName
      */
+    @Transactional
     public void deleteRescuer(String rescuerName) {
-        if(rescuerModeMap.get(rescuerName) != null) {
-            rescuerModeMap.remove(rescuerName);
-        }
-        else {
-            throw new RescuerDoesNotExistsException();
+        if(rescuerRepository.findByRescuerName(rescuerName) != null) {
+//            userModeMap.remove(userName);
+            rescuerRepository.deleteByRescuerName(rescuerName);
+        } else {
+            throw new UserDoesNotExistsException();
         }
     }
 
