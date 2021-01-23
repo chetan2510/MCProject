@@ -1,11 +1,8 @@
 package com.networking.mc.service;
 
-import com.networking.mc.Exceptions.Service.RescuerAlreadyExistsException;
-import com.networking.mc.Exceptions.Service.RescuerDoesNotExistsException;
 import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
 import com.networking.mc.model.RescueModel;
 import com.networking.mc.model.RescueModelResponse;
-import com.networking.mc.model.RescuerLoginModel;
 import com.networking.mc.repository.RescuerRepository;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -81,4 +81,8 @@ public class UserService {
             this.notificationMap.put("notification", notification);
         }
     }
+
+    public String getNotification() {
+        return this.notificationMap.get("notification");
+    }
 }

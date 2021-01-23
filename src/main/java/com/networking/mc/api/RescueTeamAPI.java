@@ -1,19 +1,16 @@
 package com.networking.mc.api;
 
 import com.networking.mc.api.response.GeneralResponseMessage;
-import com.networking.mc.api.response.NotificationMessage;
+import com.networking.mc.model.NotificationMessages;
 import com.networking.mc.model.RescueModel;
 import com.networking.mc.model.RescueModelResponse;
-import com.networking.mc.model.RescuerLoginModel;
 import com.networking.mc.service.RescueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.GeneratedValue;
 import java.time.Instant;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -73,8 +70,10 @@ public class RescueTeamAPI {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getrescuernotification", method = RequestMethod.GET)
-    public LinkedHashMap<String , String> getNotification() {
+    public NotificationMessages getNotification() {
         logger.info("Request received at " + Instant.now() + "at /getrescuernotification api");
-        return rescueService.notificationMap;
+        NotificationMessages notificationMessages = new NotificationMessages();
+        notificationMessages.notificationMessage = rescueService.notificationMap.get("notification");
+        return  notificationMessages;
     }
 }

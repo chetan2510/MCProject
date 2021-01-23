@@ -2,6 +2,8 @@ package com.networking.mc.api;
 
 import com.networking.mc.api.response.GeneralResponseMessage;
 import com.networking.mc.api.response.MultipleuserAddedresponse;
+import com.networking.mc.api.response.NotificationMessage;
+import com.networking.mc.model.NotificationMessages;
 import com.networking.mc.model.UserModel;
 import com.networking.mc.service.UserService;
 import lombok.NonNull;
@@ -62,9 +64,11 @@ public class UserAPI {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getusernotification", method = RequestMethod.GET)
-    public LinkedHashMap<String , String> getNotification() {
+    public NotificationMessages getNotification() {
         logger.info("Request received at " + Instant.now() + "at /getusernotification api");
-        return userService.notificationMap;
+        NotificationMessages notificationMessages = new NotificationMessages();
+        notificationMessages.notificationMessage = userService.getNotification();
+        return  notificationMessages;
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
