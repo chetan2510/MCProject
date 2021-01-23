@@ -1,5 +1,7 @@
 package com.networking.mc.service;
 
+import com.networking.mc.model.NotificationMessages;
+import com.networking.mc.repository.NotificationMessagesInterface;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ public class AdminService {
     UserService userService;
 
     @Autowired
+    NotificationMessagesInterface notificationMessagesInterface;
+
+    @Autowired
     RescueService rescueService;
 
     /**
@@ -18,8 +23,12 @@ public class AdminService {
      * @param notification
      */
     public void sendNotificationToUsers(String notification) {
-        if(!StringUtil.isNullOrEmpty(notification))
         userService.addNotification(notification);
+        NotificationMessages notificationMessages = new NotificationMessages();
+        notificationMessages.notificationMessage = notification;
+        notificationMessages.receiver = "Users";
+        notificationMessagesInterface.save(notificationMessages);
+
     }
 
     /**
@@ -27,7 +36,14 @@ public class AdminService {
      * @param notification
      */
     public void sendNotificationToRescuers(String notification) {
-        if(!StringUtil.isNullOrEmpty(notification))
             rescueService.addNotification(notification);
+        NotificationMessages notificationMessages = new NotificationMessages();
+        notificationMessages.notificationMessage = notification;
+        notificationMessages.receiver = "Rescuers";
+        notificationMessagesInterface.save(notificationMessages);
+    }
+
+    public Iterable<NotificationMessages> getAllNotification() {
+        return notificationMessagesInterface.findAll();
     }
 }

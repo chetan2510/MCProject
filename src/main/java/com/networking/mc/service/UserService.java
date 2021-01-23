@@ -1,6 +1,7 @@
 package com.networking.mc.service;
 
 import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
+import com.networking.mc.model.RescueModel;
 import com.networking.mc.model.UserModel;
 import com.networking.mc.repository.UserRepository;
 import io.netty.util.internal.StringUtil;
@@ -59,8 +60,12 @@ public class UserService {
     }
 
     public void addMultipleUsers() {
+        double latitude = 50.1201;
+        double longitude = 8.6521;
         for(int num = 1; num <=19; num++) {
-            UserModel userModel = new UserModel("User" +num, "1"+num, "1"+num);
+            latitude = latitude + 0.2;
+            longitude = longitude + 0.2;
+            UserModel userModel = new UserModel("User" +num, latitude + "", longitude + "", "flood", "medium", "normal");
             addUserToList(userModel);
         }
     }

@@ -1,6 +1,7 @@
 package com.networking.mc.api;
 
 import com.networking.mc.api.response.NotificationMessage;
+import com.networking.mc.model.NotificationMessages;
 import com.networking.mc.model.RescueModel;
 import com.networking.mc.model.UserModel;
 import com.networking.mc.service.AdminService;
@@ -56,6 +57,13 @@ public class AdminAPI {
         adminService.sendNotificationToRescuers(notification);
         logger.info("Request received at " + Instant.now() + "at /sendnotificationtorescuers api");
         return new NotificationMessage("Notification sent to rescuers");
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value="/getallnotifications", method = RequestMethod.GET)
+    public Iterable<NotificationMessages> getAllNotification() {
+        logger.info("Request received at " + Instant.now() + "at /getallnotifications api");
+        return adminService.getAllNotification();
     }
 
 }

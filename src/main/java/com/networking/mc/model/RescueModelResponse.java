@@ -4,15 +4,12 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Getter
 @Setter
-@Entity
-public class RescueModel {
+public class RescueModelResponse {
 
     @NonNull
     @Id
@@ -25,26 +22,12 @@ public class RescueModel {
     public String longitude;
 
     @NotNull
-    public String status;
+    private String status;
 
-    @NotNull
-    @ToString.Exclude()
-    public String password;
-
-
-    /**
-     * Constructor
-     * @param rescuerName
-     * @param latitude
-     * @param longitude
-     */
-    public RescueModel(String rescuerName, String latitude, String longitude, String status, String password) {
+    public RescueModelResponse(@NonNull String rescuerName, @NonNull String latitude, @NonNull String longitude, String status) {
         this.rescuerName = rescuerName;
         this.latitude = latitude;
         this.longitude = longitude;
         this.status = status;
-        this.password = password;
     }
-
-    protected RescueModel() {}
 }

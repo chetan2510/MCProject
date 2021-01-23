@@ -4,14 +4,16 @@ import com.networking.mc.Exceptions.Service.RescuerAlreadyExistsException;
 import com.networking.mc.Exceptions.Service.RescuerDoesNotExistsException;
 import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
 import com.networking.mc.model.RescueModel;
+import com.networking.mc.model.RescueModelResponse;
+import com.networking.mc.model.RescuerLoginModel;
 import com.networking.mc.repository.RescuerRepository;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class RescueService {
@@ -24,22 +26,36 @@ public class RescueService {
     RescuerRepository rescuerRepository;
 
     public String addRescuerToList(RescueModel rescueModel) {
-        if(rescuerRepository.findByRescuerName(rescueModel.rescuerName) == null) {
             rescuerRepository.save(rescueModel);
-            return "Rescuer added to the list";
-        } else {
-            rescuerRepository.save(rescueModel);
-            return "Rescuer location updated in the list";
-        }
+            return "Rescuer added to the list, please sign in to continue";
     }
 
-    public Iterable<RescueModel> getRescuerList() {
-        return rescuerRepository.findAll();
+    public String loginRescuer(RescueModel resModel) {
+            RescueModel rescueModel = rescuerRepository.findByRescuerName(resModel.rescuerName);
+            if(rescueModel.password.equals(resModel.password)) {
+                return "Success";
+            } else {
+                return "Fail";
+            }
+    }
+
+    public List<RescueModelResponse> getRescuerList() {
+        List<RescueModelResponse> responseList = new LinkedList<>();
+        Iterable<RescueModel> iterable = rescuerRepository.findAll();
+        for(RescueModel rescueModel : iterable) {
+            RescueModelResponse rescueModelResponse = new RescueModelResponse(rescueModel.rescuerName, rescueModel.latitude, rescueModel.longitude, rescueModel.status);
+            responseList.add(rescueModelResponse);
+        }
+        return  responseList;
     }
 
     public void addMultipleUsers(){
+        double latitude = 50.1201;
+        double longitude = 8.6521;
         for(int num = 1; num <=19; num++) {
-            RescueModel rescueModel = new RescueModel("Rescuer" +num, "1"+num, "1"+num);
+            latitude = latitude + 0.2;
+            longitude = longitude + 0.2;
+            RescueModel rescueModel = new RescueModel("Rescuer" +num, latitude + "", longitude + "", "Active", "qwertyuiop");
             addRescuerToList(rescueModel);
         }
     }

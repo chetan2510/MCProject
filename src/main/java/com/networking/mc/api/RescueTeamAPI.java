@@ -3,15 +3,19 @@ package com.networking.mc.api;
 import com.networking.mc.api.response.GeneralResponseMessage;
 import com.networking.mc.api.response.NotificationMessage;
 import com.networking.mc.model.RescueModel;
+import com.networking.mc.model.RescueModelResponse;
+import com.networking.mc.model.RescuerLoginModel;
 import com.networking.mc.service.RescueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.GeneratedValue;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rescuer")
@@ -23,15 +27,22 @@ public class RescueTeamAPI {
     private final Logger logger = LoggerFactory.getLogger(UserAPI.class);
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @RequestMapping(value = "/addrescuer", method = RequestMethod.POST)
-    public GeneralResponseMessage addRescuer(@RequestBody RescueModel rescueModel) {
-        logger.info("Request received at " + Instant.now() + "at /adrescuer api");
+    @RequestMapping(value = "/signuprescuer", method = RequestMethod.POST)
+    public GeneralResponseMessage signUpRescuer(@RequestBody RescueModel rescueModel) {
+        logger.info("Request received at " + Instant.now() + "at /signuprescuer api");
         return new GeneralResponseMessage(rescueService.addRescuerToList(rescueModel));
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/loginrescuer", method = RequestMethod.POST)
+    public GeneralResponseMessage loginRescuer(@RequestBody RescueModel rescueModel) {
+        logger.info("Request received at " + Instant.now() + "at /loginrescuer api");
+        return new GeneralResponseMessage(rescueService.loginRescuer(rescueModel));
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getallrescuers", method = RequestMethod.GET)
-    public Iterable<RescueModel> getAllRescuers() {
+    public List<RescueModelResponse> getAllRescuers() {
         logger.info("Request received at " + Instant.now() + "at /getallrescuers api");
         return rescueService.getRescuerList();
     }
