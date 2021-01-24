@@ -67,7 +67,11 @@ public class UserAPI {
     public NotificationMessages getNotification() {
         logger.info("Request received at " + Instant.now() + "at /getusernotification api");
         NotificationMessages notificationMessages = new NotificationMessages();
-        notificationMessages.notificationMessage = userService.getNotification();
+        if(userService.getNotification() == null) {
+            notificationMessages.notificationMessage = "";
+        } else {
+            notificationMessages.notificationMessage = userService.getNotification();
+        }
         return  notificationMessages;
     }
 

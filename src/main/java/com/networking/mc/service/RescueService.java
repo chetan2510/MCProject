@@ -75,6 +75,10 @@ public class RescueService {
         }
     }
 
+    public String getNotification() {
+        return this.notificationMap.get("notification");
+    }
+
     /**
      *
      * @param rescuerName

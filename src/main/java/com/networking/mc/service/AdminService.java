@@ -36,7 +36,7 @@ public class AdminService {
      * @param notification
      */
     public void sendNotificationToRescuers(String notification) {
-            rescueService.addNotification(notification);
+        rescueService.addNotification(notification);
         NotificationMessages notificationMessages = new NotificationMessages();
         notificationMessages.notificationMessage = notification;
         notificationMessages.receiver = "Rescuers";

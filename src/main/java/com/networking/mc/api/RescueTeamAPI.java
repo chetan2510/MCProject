@@ -73,14 +73,18 @@ public class RescueTeamAPI {
     public NotificationMessages getNotification() {
         logger.info("Request received at " + Instant.now() + "at /getrescuernotification api");
         NotificationMessages notificationMessages = new NotificationMessages();
-        notificationMessages.notificationMessage = rescueService.notificationMap.get("notification");
+        if(rescueService.getNotification() == null) {
+            notificationMessages.notificationMessage = "";
+        } else {
+            notificationMessages.notificationMessage = rescueService.getNotification();
+        }
         return  notificationMessages;
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/updaterescuerstatus", method = RequestMethod.GET)
     public GeneralResponseMessage updateRescuerStatus(@RequestParam String status, @RequestParam String rescuerName) {
-        logger.info("Request received at " + Instant.now() + "at /getrescuernotification api");
+        logger.info("Request received at " + Instant.now() + "at /updaterescuerstatus api");
         return new GeneralResponseMessage(rescueService.updateRescuerStatus(status, rescuerName));
     }
 }
