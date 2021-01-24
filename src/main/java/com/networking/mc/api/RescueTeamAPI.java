@@ -76,4 +76,11 @@ public class RescueTeamAPI {
         notificationMessages.notificationMessage = rescueService.notificationMap.get("notification");
         return  notificationMessages;
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/updaterescuerstatus", method = RequestMethod.GET)
+    public GeneralResponseMessage updateRescuerStatus(@RequestParam String status, @RequestParam String rescuerName) {
+        logger.info("Request received at " + Instant.now() + "at /getrescuernotification api");
+        return new GeneralResponseMessage(rescueService.updateRescuerStatus(status, rescuerName));
+    }
 }

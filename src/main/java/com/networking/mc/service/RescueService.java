@@ -1,5 +1,7 @@
 package com.networking.mc.service;
 
+import com.networking.mc.Exceptions.Service.EmptyStringException;
+import com.networking.mc.Exceptions.Service.RescuerDoesNotExistsException;
 import com.networking.mc.Exceptions.Service.UserDoesNotExistsException;
 import com.networking.mc.model.RescueModel;
 import com.networking.mc.model.RescueModelResponse;
@@ -84,6 +86,24 @@ public class RescueService {
             rescuerRepository.deleteByRescuerName(rescuerName);
         } else {
             throw new UserDoesNotExistsException();
+        }
+    }
+
+
+    public String updateRescuerStatus(String status, String userName) {
+
+        RescueModel rescueModel = rescuerRepository.findByRescuerName(userName);
+
+        if(rescueModel == null) {
+            throw new RescuerDoesNotExistsException();
+        }
+
+        if(!StringUtil.isNullOrEmpty(status)) {
+            rescueModel.status = status;
+            rescuerRepository.save(rescueModel);
+            return "Status updated successfully";
+        } else {
+            throw new EmptyStringException();
         }
     }
 
