@@ -1,0 +1,2 @@
+docker build . --tag mobilecomputing
+docker run -p 9902:9902 mobilecomputing
