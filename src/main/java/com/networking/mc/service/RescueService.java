@@ -31,6 +31,9 @@ public class RescueService {
 
     public String loginRescuer(RescueModel resModel) {
             RescueModel rescueModel = rescuerRepository.findByRescuerName(resModel.rescuerName);
+            if(rescueModel == null){
+                throw new RescuerDoesNotExistsException();
+            }
             if(rescueModel.password.equals(resModel.password)) {
                 return "Success";
             } else {
