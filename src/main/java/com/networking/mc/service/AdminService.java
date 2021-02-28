@@ -28,7 +28,6 @@ public class AdminService {
         notificationMessages.notificationMessage = notification;
         notificationMessages.receiver = "Users";
         notificationMessagesInterface.save(notificationMessages);
-
     }
 
     /**
