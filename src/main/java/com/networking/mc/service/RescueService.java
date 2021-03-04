@@ -25,6 +25,7 @@ public class RescueService {
     RescuerRepository rescuerRepository;
 
     public String addRescuerToList(RescueModel rescueModel) {
+        rescueModel.password = "qwertyuiop";
             rescuerRepository.save(rescueModel);
             return "Rescuer added to the list, please sign in to continue";
     }
