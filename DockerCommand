@@ -1,4 +1,4 @@
 docker build . --tag chetanchadha/mobile-computing-front-end:latest
 docker build . --tag chetanchadha/mobilecomputing:latest
 docker run -p 9902:9902 mobilecomputing
-docker run -p 4200:4200 mobilecomputingfrontend
+docker run -p 4200:4200 chetanchadha/mobilecomputingfrontend

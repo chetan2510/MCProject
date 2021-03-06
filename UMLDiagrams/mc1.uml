@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.networking.mc</OriginalElement>
+  <nodes>
+    <node x="168.0" y="296.0">com.networking.mc.api</node>
+    <node x="0.0" y="222.0">com.networking.mc.McApplication</node>
+    <node x="0.0" y="296.0">com.networking.mc.model</node>
+    <node x="0.0" y="0.0">com.networking.mc.repository</node>
+    <node x="0.0" y="148.0">com.networking.mc.WebSocketConfig</node>
+    <node x="198.0" y="148.0">com.networking.mc.messaging</node>
+    <node x="0.0" y="74.0">com.networking.mc.Exceptions</node>
+    <node x="184.0" y="222.0">com.networking.mc.service</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.9333333333333333" x="174.5" y="152.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
