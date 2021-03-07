@@ -2,7 +2,6 @@ package com.networking.mc.api;
 
 import com.networking.mc.api.response.GeneralResponseMessage;
 import com.networking.mc.api.response.MultipleuserAddedresponse;
-import com.networking.mc.api.response.NotificationMessage;
 import com.networking.mc.model.NotificationMessages;
 import com.networking.mc.model.UserModel;
 import com.networking.mc.service.UserService;
@@ -12,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
-import java.util.LinkedHashMap;
-
 
 @RestController // Marks this class that it has controllers inside it
 @RequestMapping("/user")
@@ -24,6 +21,11 @@ public class UserAPI {
     @Autowired
     private UserService userService;
 
+    /**
+     * To add a user
+     * @param userModel
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public GeneralResponseMessage addUser(@RequestBody UserModel userModel) {
@@ -32,6 +34,11 @@ public class UserAPI {
 
     }
 
+    /**
+     * To get a user
+     * @param username
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getuser/{username}", method = RequestMethod.GET)
     public UserModel getUser(@PathVariable @NonNull String  username) {
@@ -39,6 +46,11 @@ public class UserAPI {
         return userService.getUser(username);
     }
 
+    /**
+     * To delete a user
+     * @param username
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/deleteuser", method = RequestMethod.DELETE)
     public GeneralResponseMessage deleteUser(@RequestParam @NonNull String username) {
@@ -47,6 +59,10 @@ public class UserAPI {
         return new GeneralResponseMessage("User deleted successfully");
     }
 
+    /**
+     * To get all users
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getallusers", method = RequestMethod.GET)
     public Iterable<UserModel> getAllUsers() {
@@ -54,6 +70,10 @@ public class UserAPI {
        return userService.getUserList();
     }
 
+    /**
+     * To add multiple users
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value="/addmultipleusers", method = RequestMethod.GET)
     public MultipleuserAddedresponse addMultipleUsers() {
@@ -62,6 +82,10 @@ public class UserAPI {
             return new MultipleuserAddedresponse("Multiple user added successfully");
     }
 
+    /**
+     * To get user notification
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getusernotification", method = RequestMethod.GET)
     public NotificationMessages getNotification() {
@@ -75,6 +99,10 @@ public class UserAPI {
         return  notificationMessages;
     }
 
+    /**
+     * To clear all users
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/clearallusers", method = RequestMethod.GET)
     public GeneralResponseMessage clearAllUsers() {

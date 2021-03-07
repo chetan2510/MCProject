@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.Id;
 
+
+/**
+ * Model class for rescuer response
+ */
 @Getter
 @Setter
 public class RescueModelResponse {

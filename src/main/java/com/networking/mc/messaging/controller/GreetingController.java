@@ -13,6 +13,12 @@ import org.springframework.web.util.HtmlUtils;
 @RestController
 public class GreetingController {
 
+    /**
+     * Method for web socketing
+     * @param message
+     * @return
+     * @throws Exception
+     */
     @MessageMapping("/resume")
     @SendTo("/start/initial")
     public Greeting greeting(String message) throws Exception {

@@ -35,6 +35,11 @@ public class McApplication extends SpringBootServletInitializer {
 //        return bean;
 //    }
 //
+
+    /**
+     * Main method that starts the application
+     * @param args
+     */
     public static void main(String[] args) {
         SpringApplication.run(McApplication.class, args);
     }

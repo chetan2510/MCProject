@@ -19,7 +19,7 @@ public class AdminService {
     RescueService rescueService;
 
     /**
-     *
+     * Sends notification to the users
      * @param notification
      */
     public void sendNotificationToUsers(String notification) {
@@ -31,7 +31,7 @@ public class AdminService {
     }
 
     /**
-     *
+     * Sends notification to the rescuers
      * @param notification
      */
     public void sendNotificationToRescuers(String notification) {
@@ -42,6 +42,10 @@ public class AdminService {
         notificationMessagesInterface.save(notificationMessages);
     }
 
+    /**
+     * Method gets all the notificartions
+     * @return
+     */
     public Iterable<NotificationMessages> getAllNotification() {
         return notificationMessagesInterface.findAll();
     }

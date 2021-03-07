@@ -9,6 +9,9 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * Model class for rescuer
+ */
 @Getter
 @Setter
 @Entity

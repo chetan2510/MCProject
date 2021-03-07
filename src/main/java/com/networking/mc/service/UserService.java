@@ -20,6 +20,11 @@ public class UserService {
 //    private LinkedHashMap<String , UserModel> userModeMap = new LinkedHashMap<>();
     public LinkedHashMap<String , String> notificationMap = new LinkedHashMap<>();
 
+    /**
+     * To add users to the list
+     * @param userModel
+     * @return
+     */
     public String addUserToList(UserModel userModel) {
         if(userRepository.findByUserName(userModel.userName) == null) {
             userRepository.save(userModel);
@@ -30,10 +35,18 @@ public class UserService {
         }
     }
 
+    /**
+     * To get user list
+     * @return
+     */
     public Iterable<UserModel> getUserList() {
         return userRepository.findAll();
     }
 
+    /**
+     * To delete a user
+     * @param userName
+     */
     @Transactional
     public void deleteUser(String userName) {
         if(userRepository.findByUserName(userName) != null) {
@@ -44,11 +57,19 @@ public class UserService {
         }
     }
 
+    /**
+     * To delete all the users
+     */
     public void deleteAll() {
 //       this.userModeMap.clear();
        userRepository.deleteAll();
     }
 
+    /**
+     * To get a user
+     * @param userName
+     * @return
+     */
     public UserModel getUser(String userName) {
 
         UserModel userModel = userRepository.findByUserName(userName);
@@ -59,6 +80,9 @@ public class UserService {
         }
     }
 
+    /**
+     * To add multiple users
+     */
     public void addMultipleUsers() {
         double latitude = 50.1201;
         double longitude = 8.6521;
@@ -71,7 +95,7 @@ public class UserService {
     }
 
     /**
-     *
+     * To add notification
      * @param notification
      */
     public void addNotification(String notification) {
@@ -82,6 +106,10 @@ public class UserService {
         }
     }
 
+    /**
+     * To get a notification
+     * @return
+     */
     public String getNotification() {
         return this.notificationMap.get("notification");
     }

@@ -1,5 +1,8 @@
 package com.networking.mc.messaging.pojo;
 
+/**
+ * Greeting class used in web socket.
+ */
 public class Greeting {
 
     private String content;

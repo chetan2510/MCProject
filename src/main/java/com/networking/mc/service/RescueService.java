@@ -24,12 +24,22 @@ public class RescueService {
     @Autowired
     RescuerRepository rescuerRepository;
 
+    /**
+     * To add rescier to the list
+     * @param rescueModel
+     * @return
+     */
     public String addRescuerToList(RescueModel rescueModel) {
         rescueModel.password = "qwertyuiop";
             rescuerRepository.save(rescueModel);
             return "Rescuer added to the list, please sign in to continue";
     }
 
+    /**
+     * To login the rescuer
+     * @param resModel
+     * @return
+     */
     public String loginRescuer(RescueModel resModel) {
             RescueModel rescueModel = rescuerRepository.findByRescuerName(resModel.rescuerName);
             if(rescueModel == null){
@@ -42,6 +52,10 @@ public class RescueService {
             }
     }
 
+    /**
+     * To get the rescuer list
+     * @return
+     */
     public List<RescueModelResponse> getRescuerList() {
         List<RescueModelResponse> responseList = new LinkedList<>();
         Iterable<RescueModel> iterable = rescuerRepository.findAll();
@@ -52,6 +66,9 @@ public class RescueService {
         return  responseList;
     }
 
+    /**
+     * To add multiple users
+     */
     public void addMultipleUsers(){
         double latitude = 50.1201;
         double longitude = 8.6521;
@@ -63,12 +80,15 @@ public class RescueService {
         }
     }
 
+    /**
+     * To clear all rescuers
+     */
     public void clearAllRescuers(){
        rescuerRepository.deleteAll();
     }
 
     /**
-     *
+     * To add the notification
      * @param notification
      */
     public void addNotification(String notification) {
@@ -79,12 +99,16 @@ public class RescueService {
         }
     }
 
+    /**
+     * To get the notification
+     * @return
+     */
     public String getNotification() {
         return this.notificationMap.get("notification");
     }
 
     /**
-     *
+     * To delete a rescuer
      * @param rescuerName
      */
     @Transactional
@@ -98,6 +122,12 @@ public class RescueService {
     }
 
 
+    /**
+     * To update rescuer status
+     * @param status
+     * @param userName
+     * @return
+     */
     public String updateRescuerStatus(String status, String userName) {
 
         RescueModel rescueModel = rescuerRepository.findByRescuerName(userName);

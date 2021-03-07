@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 @RestController
@@ -23,6 +22,11 @@ public class RescueTeamAPI {
 
     private final Logger logger = LoggerFactory.getLogger(UserAPI.class);
 
+    /**
+     * API to sign up the rescuer
+     * @param rescueModel
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/signuprescuer", method = RequestMethod.POST)
     public GeneralResponseMessage signUpRescuer(@RequestBody RescueModel rescueModel) {
@@ -30,6 +34,11 @@ public class RescueTeamAPI {
         return new GeneralResponseMessage(rescueService.addRescuerToList(rescueModel));
     }
 
+    /**
+     * API to login the rescuer
+     * @param rescueModel
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/loginrescuer", method = RequestMethod.POST)
     public GeneralResponseMessage loginRescuer(@RequestBody RescueModel rescueModel) {
@@ -37,6 +46,10 @@ public class RescueTeamAPI {
         return new GeneralResponseMessage(rescueService.loginRescuer(rescueModel));
     }
 
+    /**
+     * API to get all rescuers
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getallrescuers", method = RequestMethod.GET)
     public List<RescueModelResponse> getAllRescuers() {
@@ -44,6 +57,10 @@ public class RescueTeamAPI {
         return rescueService.getRescuerList();
     }
 
+    /**
+     * To add multiple rescuers
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/addmultiplerescuers", method = RequestMethod.GET)
     public GeneralResponseMessage addMultipleRescuers() {
@@ -52,6 +69,10 @@ public class RescueTeamAPI {
         return new GeneralResponseMessage("Multiple rescuers added to the list");
     }
 
+    /**
+     * To clear all the rescuers
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/clearallrescuers", method = RequestMethod.GET)
     public GeneralResponseMessage clearAllRescuers() {
@@ -60,6 +81,11 @@ public class RescueTeamAPI {
         return new GeneralResponseMessage("Multiple rescuers cleared from the list");
     }
 
+    /**
+     * To delete a rescuer
+     * @param rescuerName
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value="/deleterescuer", method = RequestMethod.DELETE)
     public GeneralResponseMessage deleteRescuer(@RequestParam String rescuerName) {
@@ -68,6 +94,10 @@ public class RescueTeamAPI {
         return new GeneralResponseMessage("Rescuer Deleted");
     }
 
+    /**
+     * To get a rescuer notification
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/getrescuernotification", method = RequestMethod.GET)
     public NotificationMessages getNotification() {
@@ -81,6 +111,12 @@ public class RescueTeamAPI {
         return  notificationMessages;
     }
 
+    /**
+     * To update recuers status
+     * @param status
+     * @param rescuerName
+     * @return
+     */
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/updaterescuerstatus", method = RequestMethod.GET)
     public GeneralResponseMessage updateRescuerStatus(@RequestParam String status, @RequestParam String rescuerName) {

@@ -1,5 +1,8 @@
 package com.networking.mc.messaging.pojo;
 
+/**
+ * Hello Message class used in web socket.
+ */
 public class HelloMessage {
 
     private String name;
