@@ -84,12 +84,10 @@ public class UserService {
      * To add multiple users
      */
     public void addMultipleUsers() {
-        double latitude = 50.1201;
-        double longitude = 8.6521;
-        for(int num = 1; num <=19; num++) {
-            latitude = latitude + 0.2;
-            longitude = longitude + 0.2;
-            UserModel userModel = new UserModel("User" +num, latitude + "", longitude + "", "flood", "medium", "normal");
+        double [] latitude = {50.1001, 50.0901, 50.0801,50.0701, 50.0601, 50.0501, 50.0301};
+        double [] longitude = {8.6521, 8.6721, 8.6821, 8.6921, 8.7021, 8.7121, 8.7221};
+        for(int num = 0; num < 7; num++) {
+            UserModel userModel = new UserModel("User" +num, latitude[num] + "", longitude[num] + "", "flood", "medium", "normal");
             addUserToList(userModel);
         }
     }

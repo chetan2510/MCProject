@@ -67,15 +67,14 @@ public class RescueService {
     }
 
     /**
-     * To add multiple users
+     * To add multiple rescuers
      */
     public void addMultipleUsers(){
-        double latitude = 50.1201;
-        double longitude = 8.6521;
-        for(int num = 1; num <=19; num++) {
-            latitude = latitude + 0.2;
-            longitude = longitude + 0.2;
-            RescueModel rescueModel = new RescueModel("Rescuer" +num, latitude + "", longitude + "", "Active", "qwertyuiop");
+        double [] latitude = {50.1201, 50.1301, 50.1401,50.1501, 50.1601, 50.1701, 50.1801};
+        double [] longitude = {8.6521, 8.6721, 8.6821, 8.6921, 8.7021, 8.7121, 8.7221};
+
+        for(int num = 0; num < 7; num++) {
+            RescueModel rescueModel = new RescueModel("Rescuer" +num, latitude[num] + "", longitude[num] + "", "Active", "qwertyuiop");
             addRescuerToList(rescueModel);
         }
     }
